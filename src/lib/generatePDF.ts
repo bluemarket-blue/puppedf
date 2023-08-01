@@ -1,12 +1,21 @@
 import * as puppeteer from 'puppeteer';
 import { PassThrough } from 'stream';
 
-export async function generatePDFFromHTMLAndCSS(html: string, css: string): Promise<NodeJS.ReadableStream | null> {
-    const browser = await puppeteer.launch();
+import { OutputFile } from 'typescript';
+import { OutputPreferType, PdfGenerationOptions } from './MyTypes';
+import { savePDFToFile } from './savePDFToFile';
+
+export async function generatePDFFromHTMLAndCSS(html: string, css?: string, options?: PdfGenerationOptions): Promise<NodeJS.ReadableStream> {
+    if (!html) {
+        throw new Error('HTML content must be provided.');
+    }
+
+    const browser = await puppeteer.launch({
+        headless: 'new'
+    });
     const page = await browser.newPage();
 
     try {
-      // Combinez le code HTML et CSS pour former la page complète
     const pageContent = `
         <html>
             <head>
@@ -24,8 +33,21 @@ export async function generatePDFFromHTMLAndCSS(html: string, css: string): Prom
     
     
     const pdfBuffer = await page.pdf({
-        format: 'A4',
-        printBackground: true
+        displayHeaderFooter: options?.displayHeaderFooter,
+        footerTemplate: options?.footerTemplate,
+        format: options?.format ,
+        headerTemplate: options?.headerTemplate,
+        height: options?.height,
+        landscape: options?.landscape,
+        margin: options?.margin,
+        omitBackground: options?.omitBackground,
+        pageRanges: options?.pageRanges,
+        path: options?.path,
+        preferCSSPageSize: options?.preferCSSPageSize,
+        printBackground: options?.printBackground,
+        scale: options?.scale,
+        timeout: options?.timeout,
+        width: options?.width
     });
 
     await browser.close();
@@ -36,9 +58,61 @@ export async function generatePDFFromHTMLAndCSS(html: string, css: string): Prom
 
     return pdfStream;
 
+
     } catch (error) {
         console.error('An error occurred while generating the PDF :', error);
         await browser.close();
-        return null;
+        throw error;
     }
 }
+
+
+/* export async function generatePDFFromHTMLAndCSSsss(html: string, css?: string, options?: PdfGenerationOptions ): Promise<NodeJS.ReadableStream | Buffer | string | null> {
+    if (!html) {
+        throw new Error('HTML content must be provided.');
+    }
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    try {
+
+
+    const pageContent = `
+        <html>
+            <head>
+                <style>
+                    ${css}
+                </style>
+            </head>
+            <body>
+                ${html}
+            </body>
+        </html>
+    `;
+
+
+
+  
+      await browser.close();
+  
+      switch (outputType) {
+        case 'buffer':
+          return pdfBuffer;
+        case 'file':
+          // Implement file handling if required
+          break;
+        default:
+          // Transforms the Buffer into a ReadableStream
+          const pdfStream = new PassThrough();
+          pdfStream.end(pdfBuffer);
+          return pdfStream;
+      }
+  
+      return null;
+    } catch (error) {
+      console.error('An error occurred while generating the PDF :', error);
+      await browser.close();
+      throw error;
+    }
+  } */

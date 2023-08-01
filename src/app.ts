@@ -1,6 +1,8 @@
+import { PdfGenerationOptions } from "./lib/MyTypes";
 import { generatePDFFromHTMLAndCSS } from "./lib/generatePDF";
 import { replaceKeysInHTML } from "./lib/replaceKeysInTemplate";
 import { savePDFToFile } from "./lib/savePDFToFile";
+
 
 
 // Exemple d'utilisation
@@ -79,7 +81,9 @@ const sampleHTML = `
 </html>
 `;
 
-const sampleCSS = `
+const sampleCSS = '';
+
+const saveCSS =  `
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -171,8 +175,7 @@ body {
   margin-top: 20px;
   font-style: italic;
 }
-`;
-
+`
 
 const invoiceData = [
   { key: "seller_name", value: "ABC Company" },
@@ -194,7 +197,13 @@ const invoiceData = [
 
 const finalHTML = replaceKeysInHTML(sampleHTML, invoiceData)
 
-generatePDFFromHTMLAndCSS(finalHTML, sampleCSS)
+const opt : PdfGenerationOptions = {
+  printBackground: true,
+  landscape: true
+
+}
+
+generatePDFFromHTMLAndCSS(finalHTML, sampleCSS, opt)
   .then((pdfStream) => {
     if (pdfStream) {
       const outputPath = './output.pdf'; 

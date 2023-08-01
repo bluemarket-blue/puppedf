@@ -1,5 +1,5 @@
 {
-  "name": "puppedf",
+  "name": "@bluemarket-blue/puppedf",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/bluemarket-blue/puppedf.git"
   },
-  "author": "",
+  "author": "Tyren & Lisandro",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bluemarket-blue/puppedf/issues"

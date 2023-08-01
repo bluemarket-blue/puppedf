@@ -78,7 +78,8 @@ const sampleHTML = `
 </body>
 </html>
 `;
-const sampleCSS = `
+const sampleCSS = '';
+const saveCSS = `
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -189,7 +190,11 @@ const invoiceData = [
     { key: "total", value: "30.00 €" }
 ];
 const finalHTML = (0, replaceKeysInTemplate_1.replaceKeysInHTML)(sampleHTML, invoiceData);
-(0, generatePDF_1.generatePDFFromHTMLAndCSS)(finalHTML, sampleCSS)
+const opt = {
+    printBackground: true,
+    landscape: true
+};
+(0, generatePDF_1.generatePDFFromHTMLAndCSS)(finalHTML, sampleCSS, opt)
     .then((pdfStream) => {
     if (pdfStream) {
         const outputPath = './output.pdf';
