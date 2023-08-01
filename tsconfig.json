@@ -1,0 +1,17 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2021", // Version d'ECMAScript cible (peut être modifiée selon vos besoins)
+    "module": "commonjs", // Système de modules (utilisez "esnext" si vous utilisez ES modules)
+    "outDir": "dist", // Dossier de sortie pour les fichiers JavaScript transpilés
+    "rootDir": "src", // Dossier où se trouvent les fichiers TypeScript source
+    "strict": true, // Active des vérifications de typage strictes
+    "esModuleInterop": true // Active l'interopérabilité entre les modules CommonJS et ES6
+  },
+  "include": [
+    "src/**/*.ts" // Inclure tous les fichiers .ts dans le dossier "src"
+  ],
+  "exclude": [
+    "node_modules" // Exclure le dossier "node_modules"
+  ]
+}
