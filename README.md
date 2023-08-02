@@ -1,4 +1,6 @@
-<img src="/docs/images/logo.png" alt="Puppedf logo" />
+<div align="center">
+        <img src="/docs/images/logo.png" alt="Puppedf logo" align="center" />
+</div>
 
 <h1 align="center">Puppedf - Easiest way to generate pdf from html </h1>
 <h3 align="center">Use your Template and feed with data</h3>
