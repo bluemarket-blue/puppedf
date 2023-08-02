@@ -1,16 +1,18 @@
 {
   "name": "@bluemarket-blue/puppedf",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluemarket-blue/puppedf.git"
+  },
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "library that easily converts an html template into a pdf with data",
+  "main": "dist/app.js",
+  "types": "dist/app.d.js",
+  "files": ["dist"], 
   "scripts": {
     "start": "node dist/app.js",
     "watch-ts": "tsc -w",
     "build": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bluemarket-blue/puppedf.git"
   },
   "author": "Tyren & Lisandro",
   "license": "ISC",

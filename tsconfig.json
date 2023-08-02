@@ -6,11 +6,12 @@
     "outDir": "dist", // Dossier de sortie pour les fichiers JavaScript transpilés
     "rootDir": "src", // Dossier où se trouvent les fichiers TypeScript source
     "strict": true, // Active des vérifications de typage strictes
-    "esModuleInterop": true // Active l'interopérabilité entre les modules CommonJS et ES6
+    "esModuleInterop": true, // Active l'interopérabilité entre les modules CommonJS et ES6
+    "declaration": true
   },
   "include": [
     "src/**/*.ts" // Inclure tous les fichiers .ts dans le dossier "src"
-  ],
+, "src/exemples/example1.ts"  ],
   "exclude": [
     "node_modules" // Exclure le dossier "node_modules"
   ]

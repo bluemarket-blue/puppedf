@@ -23,19 +23,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generatePDFFromHTMLAndCSS = void 0;
+exports.generatePDFstream = void 0;
 const puppeteer = __importStar(require("puppeteer"));
 const stream_1 = require("stream");
-async function generatePDFFromHTMLAndCSS(html, css, options) {
+const replaceKeysInTemplate_1 = require("./replaceKeysInTemplate");
+async function generatePDFstream(html, css, data, options) {
     if (!html) {
-        throw new Error('HTML content must be provided.');
+        return Promise.reject(new Error('HTML content must be provided.'));
     }
     const browser = await puppeteer.launch({
         headless: 'new'
     });
     const page = await browser.newPage();
     try {
-        const pageContent = `
+        const htmlIn = `
         <html>
             <head>
                 <style>
@@ -47,7 +48,7 @@ async function generatePDFFromHTMLAndCSS(html, css, options) {
             </body>
         </html>
     `;
-        await page.setContent(pageContent, { waitUntil: 'networkidle0' });
+        await page.setContent((data ? (0, replaceKeysInTemplate_1.replaceKeysInHTML)(htmlIn, data) : htmlIn), { waitUntil: 'networkidle0' });
         const pdfBuffer = await page.pdf({
             displayHeaderFooter: options?.displayHeaderFooter,
             footerTemplate: options?.footerTemplate,
@@ -77,53 +78,4 @@ async function generatePDFFromHTMLAndCSS(html, css, options) {
         throw error;
     }
 }
-exports.generatePDFFromHTMLAndCSS = generatePDFFromHTMLAndCSS;
-/* export async function generatePDFFromHTMLAndCSSsss(html: string, css?: string, options?: PdfGenerationOptions ): Promise<NodeJS.ReadableStream | Buffer | string | null> {
-    if (!html) {
-        throw new Error('HTML content must be provided.');
-    }
-
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    try {
-
-
-    const pageContent = `
-        <html>
-            <head>
-                <style>
-                    ${css}
-                </style>
-            </head>
-            <body>
-                ${html}
-            </body>
-        </html>
-    `;
-
-
-
-  
-      await browser.close();
-  
-      switch (outputType) {
-        case 'buffer':
-          return pdfBuffer;
-        case 'file':
-          // Implement file handling if required
-          break;
-        default:
-          // Transforms the Buffer into a ReadableStream
-          const pdfStream = new PassThrough();
-          pdfStream.end(pdfBuffer);
-          return pdfStream;
-      }
-  
-      return null;
-    } catch (error) {
-      console.error('An error occurred while generating the PDF :', error);
-      await browser.close();
-      throw error;
-    }
-  } */ 
+exports.generatePDFstream = generatePDFstream;

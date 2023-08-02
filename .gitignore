@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules
+
+# Outputs
+/dist
+
+# Test files
+/*.pdf
+
