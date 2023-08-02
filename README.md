@@ -1,8 +1,12 @@
+<img src="/docs/images/logo.png" alt="Puppedf logo" />
+
 <h1 align="center">Puppedf - Easiest way to generate pdf from html </h1>
 <h3 align="center">Use your Template and feed with data</h3>
 <div align="center">
 
-[![GitHub](https://img.shields.io/github/license/bluemarket-blue/puppedf)](https : //github.com/bluemarket-blue/puppyf/blob/main/LICENCE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+https://img.shields.io/badge/Maintained%3F-yes-green.svg
 
 
 </div>
