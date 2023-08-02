@@ -110,17 +110,17 @@ You can customize PDF generation using the following options:
 - `headerTemplate`: Header template
 - `footerTemplate`: Footer template
 - `format`: Paper format (e.g. 'A4', 'Letter', 'Legal', etc.)
-- height`: Paper height in inches or millimeters.
-- landscape`: Display in landscape mode (Boolean)
-- margin`: Paper margins
+- `height`: Paper height in inches or millimeters.
+- `landscape`: Display in landscape mode (Boolean)
+- `margin`: Paper margins
 - `omitBackground`: Omit background when generating (Boolean)
-- pageRanges`: Page ranges to be included in the PDF (e.g. '1-5', '2', '7-10')
-- path`: PDF save path
+- `pageRanges`: Page ranges to be included in the PDF (e.g. '1-5', '2', '7-10')
+- `path`: PDF save path
 - `preferCSSPageSize`: Use CSS size rather than paper size (Boolean)
 - `printBackground`: Print page backgrounds (Boolean)
-- scale`: Page scale (float)
-- timeout`: Timeout for PDF generation (in milliseconds)
-- width`: Paper width in inches or millimeters
+- `scale`: Page scale (float)
+- `timeout`: Timeout for PDF generation (in milliseconds)
+- `width`: Paper width in inches or millimeters
 
 More detail here https://pptr.dev/api/puppeteer.pdfoptions
 
