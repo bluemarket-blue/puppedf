@@ -11,6 +11,99 @@ const sampleHTML = `
 <head>
   <meta charset="UTF-8">
   <title>Invoice</title>
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .invoice {
+    margin: 20px;
+    max-width: 794px; /* A4 width in pixels at 72 DPI */
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+  
+  .invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .invoice-logo {
+    width: 150px;
+    height: 50px;
+    /* Your logo URL or CSS background property here */
+  }
+  
+  .invoice-info {
+    font-size: 14px;
+  }
+  
+  .invoice-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .invoice-addresses {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .invoice-address {
+    flex: 1;
+  }
+  
+  .invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .invoice-table th,
+  .invoice-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .invoice-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .invoice-total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .invoice-footer {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    margin-top: 50px;
+  }
+  
+  .legal-text {
+    color: #888;
+    font-size: 10px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .thank-you {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  </style>
 </head>
 <body>
   <div class="invoice">
@@ -81,100 +174,6 @@ const sampleHTML = `
 `;
 
 
-const sampleCSS =  `
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.invoice {
-  margin: 20px;
-  max-width: 794px; /* A4 width in pixels at 72 DPI */
-  background-color: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-}
-
-.invoice-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.invoice-logo {
-  width: 150px;
-  height: 50px;
-  /* Your logo URL or CSS background property here */
-}
-
-.invoice-info {
-  font-size: 14px;
-}
-
-.invoice-title {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.invoice-addresses {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.invoice-address {
-  flex: 1;
-}
-
-.invoice-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 30px;
-}
-
-.invoice-table th,
-.invoice-table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: left;
-}
-
-.invoice-table th {
-  background-color: #f2f2f2;
-}
-
-.invoice-total {
-  text-align: right;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.invoice-footer {
-  text-align: center;
-  font-size: 14px;
-  color: #777;
-  margin-top: 50px;
-}
-
-.legal-text {
-  color: #888;
-  font-size: 10px;
-  margin-top: 20px;
-  text-align: center;
-}
-
-.thank-you {
-  text-align: center;
-  font-size: 16px;
-  margin-top: 20px;
-  font-style: italic;
-}
-`
-
 const invoiceData = [
   { key: "seller_name", value: "ABC Company" },
   { key: "seller_address", value: "123 Main Street" },
@@ -206,7 +205,7 @@ const opt : PdfGenerationOptions = {
 
 const outputPath = './output.pdf';
 
-const  pdfStreamGenerate = generatePDFstream(finalHTML, sampleCSS, invoiceData, opt);
+const  pdfStreamGenerate = generatePDFstream(finalHTML, invoiceData, opt);
 
 
 // Here I transform the stream into a file that I write locally

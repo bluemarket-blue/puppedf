@@ -3,7 +3,7 @@ import { PassThrough } from 'stream';
 import { replaceKeysInHTML } from './replaceKeysInTemplate';
 import { PdfGenerationOptions } from './options';
 
-export async function generatePDFstream(html: string, css?: string, data?: { key: string, value: string }[],  options?: PdfGenerationOptions): Promise<NodeJS.ReadableStream> {
+export async function generatePDFstream(html: string, data?: { key: string, value: string }[],  options?: PdfGenerationOptions): Promise<NodeJS.ReadableStream> {
     if (!html) {
         return Promise.reject(new Error('HTML content must be provided.'));
     }
@@ -15,18 +15,9 @@ export async function generatePDFstream(html: string, css?: string, data?: { key
 
     try {
     const htmlIn = `
-        <html>
-            <head>
-                <style>
-                    ${css}
-                </style>
-            </head>
-            <body>
                 ${html}
-            </body>
-        </html>
     `;
-    
+        // html complet <html> </html> de manière à modifier le hearder plus facilement et d'intégrer soit même le css
     
     await page.setContent((data ? replaceKeysInHTML(htmlIn, data) : htmlIn ), { waitUntil: 'networkidle0' });
     

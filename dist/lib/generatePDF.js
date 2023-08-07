@@ -27,7 +27,7 @@ exports.generatePDFstream = void 0;
 const puppeteer = __importStar(require("puppeteer"));
 const stream_1 = require("stream");
 const replaceKeysInTemplate_1 = require("./replaceKeysInTemplate");
-async function generatePDFstream(html, css, data, options) {
+async function generatePDFstream(html, data, options) {
     if (!html) {
         return Promise.reject(new Error('HTML content must be provided.'));
     }
@@ -37,17 +37,9 @@ async function generatePDFstream(html, css, data, options) {
     const page = await browser.newPage();
     try {
         const htmlIn = `
-        <html>
-            <head>
-                <style>
-                    ${css}
-                </style>
-            </head>
-            <body>
                 ${html}
-            </body>
-        </html>
     `;
+        // html complet <html> </html> de manière à modifier le hearder plus facilement et d'intégrer soit même le css
         await page.setContent((data ? (0, replaceKeysInTemplate_1.replaceKeysInHTML)(htmlIn, data) : htmlIn), { waitUntil: 'networkidle0' });
         const pdfBuffer = await page.pdf({
             displayHeaderFooter: options?.displayHeaderFooter,
