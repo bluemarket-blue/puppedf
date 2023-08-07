@@ -40,7 +40,7 @@ Puppedf provides the following features:
 Install via NPM:
 
 ```bash
-npm i -D @bluemarket-blue/puppedf
+npm install @bluemarket/puppedf
 ```
 
 Installing via npm is currently the default.
@@ -56,7 +56,19 @@ import { generatePDFstream } from '@bluemarket-blue/puppedf';
 Then call the function to generate a PDF :
 
 ```javascript
-const html = '<html><body><h1>Hello, Puppedf!</h1></body></html>';
+const html = '
+                <!DOCTYPE html>
+                <html lang="fr">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Ma page HTML5</title>
+                        </head>
+                        <body>
+                            <h1>Hello, Puppedf!</h1>
+                        </body>
+                </html>';
+
 const pdfStream = await generatePDFstream(html);
 
 // You can then save the PDF as a file
@@ -66,15 +78,28 @@ await savePDFToFile(pdfStream, './output.pdf');
 You can also replace keys in the HTML template using a key-value array :
 
 ```javascript
-import { replaceKeysInHTML } from '@bluemarket-blue/puppedf';
 
-const htmlTemplate = '<html><body><h1>Hello, {{name}}!</h1></body></html>';
-const cssTemplate ='body {
-        background-color: #00FF00;
-        }';
+const htmlTemplate = '
+                <!DOCTYPE html>
+                <html lang="fr">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Ma page HTML5</title>
+                                <style>
+                                        body {
+                                                background-color: #00FF00;
+                                                }
+                                </style>
+                        </head>
+                        <body>
+                            <h1>Hello, {{name}}!</h1>
+                        </body>
+                </html>';
+
 const data = [{ key: 'name', value: 'John Doe' }];
 
-const pdfStream = await generatePDFstream(htmlTemplate, cssTemplate, data);
+const pdfStream = await generatePDFstream(htmlTemplate, data);
 
 
 ```
@@ -83,13 +108,24 @@ const pdfStream = await generatePDFstream(htmlTemplate, cssTemplate, data);
 And you can always use puppeteer's full range of options to style your pdf. :
 
 ```javascript
-import { replaceKeysInHTML } from '@bluemarket-blue/puppedf';
 
-const htmlTemplate = '<html><body><h1>Hello, {{name}}!</h1></body></html>';
+const htmlTemplate = '
+                <!DOCTYPE html>
+                <html lang="fr">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Ma page HTML5</title>
+                                <style>
+                                        body {
+                                                background-color: #00FF00;
+                                                }
+                                </style>
+                        </head>
+                        <body>
+                            <h1>Hello, {{name}}!</h1>
+                        </bod
 
-const cssTemplate ='body {
-        background-color: #00FF00;
-        }';
 
 const data = [{ key: 'name', value: 'John Doe' }];
 
@@ -99,7 +135,7 @@ const options = {
 }
 const data = [{ key: 'name', value: 'John Doe' }];
 
-const pdfStream = await generatePDFstream(htmlTemplate, cssTemplate, data, options);
+const pdfStream = await generatePDFstream(htmlTemplate, data, options);
 
 ```
 ## PDF generation options
